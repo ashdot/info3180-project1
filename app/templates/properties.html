@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+
+{% block main %}
+
+<h1>Properties</h1>
+
+    
+<ul class="property-grid" style="list-style: none; padding: 0;">
+    
+    {% for property in properties %}
+
+    <li>
+        <!-- Property Image -->
+        <img src="{{ url_for('get_property', filename=photo) }}" width="200" alt="Property Image">
+
+        <!-- Property Details -->
+        <p>Location: {{ location }}</p>
+        <p>Price: {{ price }}</p>
+
+        <!-- View Property Button -->
+        <form method="get" action="{{ url_for('get_property', property_id=property_id) }}">
+            <button type="submit" class="btn btn-primary">View Property</button>
+        </form>
+    </li>
+  
+    {% endfor %}
+</ul>
+
+
+
+
+
+{% endblock %}
+

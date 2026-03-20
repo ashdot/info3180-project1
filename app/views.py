@@ -24,6 +24,22 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/properties', methods=['GET'])
+def properties():
+    """Shows Properties"""
+
+
+    return render_template('properties.html', name="Mary Jane")
+
+@app.route('/properties/create', methods=['POST'])
+def new_properties():
+    """Creates Properties"""
+    return render_template('about.html', name="Mary Jane")
+
+@app.route('/properties/<propertyid>', methods=['GET'])
+def get_properties():
+    """Gets a single Property"""
+    return render_template('about.html', name="Mary Jane")
 
 ###
 # The functions below should be applicable to all Flask apps.
