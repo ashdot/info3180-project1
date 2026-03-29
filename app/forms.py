@@ -22,9 +22,6 @@ class PropertyForm(FlaskForm):
     ])
 
 
-
-
-
     photo = FileField('File', validators=[
         FileRequired(),
         FileAllowed(['jpg', 'png'], 'Images only!')
