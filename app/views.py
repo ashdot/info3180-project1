@@ -6,7 +6,12 @@ This file contains the routes for your application.
 """
 
 from app import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
+from forms import PropertyForm
+from models import Property
+from . import db 
+from werkzeug.utils import secure_filename
+import os 
 
 
 ###
@@ -28,18 +33,90 @@ def about():
 def properties():
     """Shows Properties"""
 
+    all_properties = db.session.execute(
+        db.select(Property).order_by(Property.id)
+    ).scalars().all()
 
-    return render_template('properties.html', name="Mary Jane")
+    return render_template("properties.html", properties=all_properties)
 
 @app.route('/properties/create', methods=['POST'])
 def new_properties():
     """Creates Properties"""
-    return render_template('about.html', name="Mary Jane")
 
-@app.route('/properties/<propertyid>', methods=['GET'])
-def get_properties():
+    form = PropertyForm()
+
+    if form.validate_on_submit():
+
+        # Get file data and save to your uploads folder
+
+        #photo, title,description, no of bedrooms, no of bathrooms, location and price, house and apartment
+
+        photo = form.photo.data
+
+        title = form.title.data 
+        description = form.description.data
+        no_of_bedrooms = form.number_of_bedrooms.data
+        no_of_bathrooms = form.number_of_bathrooms.data
+        location = form.location.data
+        price = form.price.data
+
+        type = form.property_type.data
+
+        filename = secure_filename(photo.filename)
+
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        new_property = Property (
+            # ... other fields ...
+            title = title, 
+            description=description,
+            number_of_bedrooms=no_of_bedrooms,
+            number_of_bathrooms=no_of_bathrooms,
+            location=location, 
+            price = price, 
+            property_type=type,
+            photo_filename=filename  # This is the string the DB wants!
+        )
+
+
+        db.session.add(new_property)
+        db.session.commit()
+
+
+
+        flash('Property Added', 'success')
+
+        return redirect(url_for('properties'))
+
+
+    
+    return render_template('newproperty.html')
+
+
+@app.route('/properties/<property_id>', methods=['GET'])
+def get_properties(property_id):
     """Gets a single Property"""
-    return render_template('about.html', name="Mary Jane")
+
+    property = db.session.get(Property, property_id)
+
+    return render_template('property.html', property=property)
+
+
+# def get_uploaded_images():
+
+#     rootdir = os.getcwd()
+
+#     upload_folder = os.path.join(rootdir, "uploads")
+
+#     images = {}
+
+#     for subdir, dirs, files in os.walk(upload_folder):
+#         for file in files: 
+#             if file.lower().endswith(('.png', '.jpg')):
+#                 images.append(file)
+
+
+#     return images
 
 ###
 # The functions below should be applicable to all Flask apps.

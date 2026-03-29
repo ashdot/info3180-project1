@@ -7,6 +7,8 @@ from wtforms.validators import DataRequired, InputRequired
 class PropertyForm(FlaskForm):
     title = StringField('Title',validators=[InputRequired()])
 
+    description = TextAreaField('Description', validators=[InputRequired()])
+
     number_of_bedrooms = StringField('Number of Bedrooms', validators=[InputRequired()])
     number_of_bathrooms = StringField('Number of Bathrooms', validators=[InputRequired()])
 
@@ -14,10 +16,13 @@ class PropertyForm(FlaskForm):
 
     price = StringField('Price', validators=[InputRequired()])
 
-    type = SelectField('Type', choices=[])
+    property_type = SelectField('Property Type', choices=[
+        ('HOUSE', 'House'), 
+        ('APARTMENT', 'Apartment')
+    ])
 
 
-    description = TextAreaField('Description', validators=[InputRequired()])
+
 
 
     photo = FileField('File', validators=[

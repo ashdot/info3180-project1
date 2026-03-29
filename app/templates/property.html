@@ -4,11 +4,29 @@
 
 {% block main %}
 
+    <!-- Property Image -->
+    <img src="{{ url_for('get_property', filename=photo) }}" width="200" alt="Property Image">
 
 
+    <!-- Property Details -->
+    <!--Font awesome was used because Bootstrap was limited in icon variety-->
 
+    <p>{{property.title}}</p>
+    
+    <p>${{ "{:,}".format(property.price) }}</p>
+    <p>{{property.type}}</p>
 
+    <p>{{property.description}}</p>
 
+    <p><i class="fa-solid fa-bed"></i>{{ property.number_of_bedrooms}}</p>
+    <p><i class="fa-solid fa-bath"></i>{{ property.number_of_bathrooms}}</p>
+
+    <p><i class="fa-solid fa-location-dot"></i>{{ property.location }}</p>
+
+    <!-- View Property Button -->
+    <a  class="btn btn-primary">
+        Email Realtor 
+    </a>
 
 
 

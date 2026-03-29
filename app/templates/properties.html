@@ -16,13 +16,15 @@
         <img src="{{ url_for('get_property', filename=photo) }}" width="200" alt="Property Image">
 
         <!-- Property Details -->
-        <p>Location: {{ location }}</p>
-        <p>Price: {{ price }}</p>
+        <!--Font awesome was used because Bootstrap was limited in icon variety-->
+        <p>${{ "{:,}".format(property.price) }}</p>
+        <p>{{ title }}</p>
+        <p><i class="fa-solid fa-location-dot"></i>{{ location }}</p> 
 
         <!-- View Property Button -->
-        <form method="get" action="{{ url_for('get_property', property_id=property_id) }}">
-            <button type="submit" class="btn btn-primary">View Property</button>
-        </form>
+        <a href="{{ url_for('get_property', property_id=property_id) }}" class="btn btn-primary">
+            View Property
+        </a>
     </li>
   
     {% endfor %}
