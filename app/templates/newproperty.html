@@ -4,68 +4,83 @@
 
 {% block main %}
 
-<h1 class="page-header">Add New Property</h1>
-
 {% include 'flash_messages.html' %}
 
-<form method="post" action="{{ url_for('properties') }}" enctype="multipart/form-data">
+<div class="new-property">
+
+<h1 class="fw-bold">Add New Property</h1>
+
+<div class="form-box">
+
+
+
+
+
+<form method="POST" action="{{ url_for('new_properties') }}" enctype="multipart/form-data">
 
     {{ form.csrf_token }}
 
     <!--Property Title-->
 
     <div class="form-group mb-3">
-    {{ form.title.label }}
+    {{ form.title.label(class="form-label") }}
     {{ form.title(class="form-control") }}
     </div>
 
     <!--Description-->
 
     <div class="form-group mb-3">
-    {{ form.description.label }}
+    {{ form.description.label(class="form-label") }}
     {{ form.description(class="form-control") }}
     </div>
 
-    <!--No. of Rooms-->
+    <div class="row mb-3">
 
-    <div class="form-group mb-3">
-    {{ form.number_of_bedrooms.label }}
-    {{ form.number_of_bedrooms(class="form-control") }}
-    
+    <!-- No. of Bedrooms -->
+    <div class="col-md-6">
+        {{ form.number_of_bedrooms.label(class="form-label") }}
+        {{ form.number_of_bedrooms(class="form-control") }}
+    </div>
 
-    <!--No. of Bathrooms-->
-
-   
-    {{ form.number_of_bathrooms.label }}
-    {{ form.number_of_bathrooms(class="form-control") }}
+    <!-- No. of Bathrooms -->
+    <div class="col-md-6">
+        {{ form.number_of_bathrooms.label(class="form-label") }}
+        {{ form.number_of_bathrooms(class="form-control") }}
+    </div>
     </div>
 
 
-    <!--Price-->
+    <div class="row mb-3">
+    <!-- Price -->
+    <div class="col-md-6">
+        {{ form.price.label(class="form-label") }}
+        {{ form.price(class="form-control") }}
+    </div>
 
-    <div class="form-group mb-3">
-    {{ form.price.label }}
-    {{ form.price(class="form-control") }}
-   
-
-    <!--Property Type-->
-
-  
-    {{ form.type.label }}
-    {{ form.type(class="form-control") }}
+    <!-- Property Type -->
+    <div class="col-md-6">
+        {{ form.property_type.label(class="form-label") }}
+        {{ form.property_type(class="form-control") }}
+    </div>
     </div>
 
     <!--Location-->
 
     <div class="form-group mb-3">
-    {{ form.location.label }}
+
+    <div class="col-md-6">
+    {{ form.location.label(class="form-label") }}
     {{ form.location(class="form-control") }}
     </div>
+
+    </div>
+
+
 
     <!--Photo-->
 
     <div class="form-group mb-3">
-    {{ form.photo.label }}
+    {{ form.photo.label(class="form-label") }}
     {{ form.photo(class="form-control") }}
     </div>
 
@@ -77,10 +92,10 @@
 </form>
 
 
+</div>
 
 
-
-
+</div>
 
 {% endblock %}
 

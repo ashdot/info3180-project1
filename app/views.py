@@ -5,11 +5,10 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for, flash
-from forms import PropertyForm
-from models import Property
-from . import db 
+from app import app,db
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from .forms import PropertyForm
+from .models import Property
 from werkzeug.utils import secure_filename
 import os 
 
@@ -39,7 +38,7 @@ def properties():
 
     return render_template("properties.html", properties=all_properties)
 
-@app.route('/properties/create', methods=['POST'])
+@app.route('/properties/create', methods=['GET','POST'])
 def new_properties():
     """Creates Properties"""
 
@@ -60,11 +59,11 @@ def new_properties():
         location = form.location.data
         price = form.price.data
 
-        type = form.property_type.data
+        property_type = form.property_type.data
 
         filename = secure_filename(photo.filename)
-
-        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        photo_path = os.path.join(app.root_path, 'static', 'uploads', filename)
+        photo.save(photo_path)
 
         new_property = Property (
             # ... other fields ...
@@ -74,7 +73,7 @@ def new_properties():
             number_of_bathrooms=no_of_bathrooms,
             location=location, 
             price = price, 
-            property_type=type,
+            property_type=property_type,
             photo_filename=filename  # This is the string the DB wants!
         )
 
@@ -90,7 +89,7 @@ def new_properties():
 
 
     
-    return render_template('newproperty.html')
+    return render_template('newproperty.html', form=form)
 
 
 @app.route('/properties/<property_id>', methods=['GET'])
@@ -100,6 +99,10 @@ def get_properties(property_id):
     property = db.session.get(Property, property_id)
 
     return render_template('property.html', property=property)
+
+@app.route('/uploads/<filename>')
+def get_property_photo(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 # def get_uploaded_images():

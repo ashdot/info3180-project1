@@ -4,25 +4,26 @@
 
 {% block main %}
 
-<h1>Properties</h1>
+<h1 class="fw-bold">Properties</h1>
 
     
 <ul class="property-grid" style="list-style: none; padding: 0;">
     
     {% for property in properties %}
+    
 
     <li>
         <!-- Property Image -->
-        <img src="{{ url_for('get_property', filename=photo) }}" width="200" alt="Property Image">
+        <img src="{{ url_for('static', filename='uploads/' ~ property.photo_filename) }}" width="200" alt="Property Image">
 
         <!-- Property Details -->
         <!--Font awesome was used because Bootstrap was limited in icon variety-->
         <p>${{ "{:,}".format(property.price) }}</p>
-        <p>{{ title }}</p>
-        <p><i class="fa-solid fa-location-dot"></i>{{ location }}</p> 
+        <p>{{ property.title }}</p>
+        <p><i class="fa-solid fa-location-dot"></i>{{ property.location }}</p> 
 
         <!-- View Property Button -->
-        <a href="{{ url_for('get_property', property_id=property_id) }}" class="btn btn-primary">
+        <a href="{{ url_for('get_properties', property_id=property.id) }}" class="btn btn-primary">
             View Property
         </a>
     </li>

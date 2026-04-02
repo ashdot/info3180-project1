@@ -5,12 +5,12 @@ from wtforms.validators import DataRequired, InputRequired
 
 
 class PropertyForm(FlaskForm):
-    title = StringField('Title',validators=[InputRequired()])
+    title = StringField('Property Title',validators=[InputRequired()])
 
     description = TextAreaField('Description', validators=[InputRequired()])
 
-    number_of_bedrooms = StringField('Number of Bedrooms', validators=[InputRequired()])
-    number_of_bathrooms = StringField('Number of Bathrooms', validators=[InputRequired()])
+    number_of_bedrooms = StringField('No. of Bedrooms', validators=[InputRequired()])
+    number_of_bathrooms = StringField('No. of Bathrooms', validators=[InputRequired()])
 
     location = StringField('Location', validators=[InputRequired()])
 
@@ -22,7 +22,7 @@ class PropertyForm(FlaskForm):
     ])
 
 
-    photo = FileField('File', validators=[
+    photo = FileField('Photo', validators=[
         FileRequired(),
         FileAllowed(['jpg', 'png'], 'Images only!')
     ])

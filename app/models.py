@@ -1,4 +1,4 @@
-from . import db 
+from app import db 
 
 
 class Property(db.Model):
@@ -26,7 +26,7 @@ class Property(db.Model):
     #photo, title,description, no of bedrooms, no of bathrooms, location and price, house and apartment
 
 
-    def __init__(self, title, description, number_of_bedrooms, number_of_bathrooms, location, price, property_type):
+    def __init__(self, title, description, number_of_bedrooms, number_of_bathrooms, location, price, property_type, photo_filename):
 
         self.title = title
         self.description = description
@@ -35,3 +35,4 @@ class Property(db.Model):
         self.location = location
         self.price = price
         self.property_type = property_type
+        self.photo_filename=photo_filename

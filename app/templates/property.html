@@ -5,7 +5,7 @@
 {% block main %}
 
     <!-- Property Image -->
-    <img src="{{ url_for('get_property', filename=photo) }}" width="200" alt="Property Image">
+    <img src="{{ url_for('get_property_photo', filename=property.photo_filename) }}" width="200" alt="Property Image">
 
 
     <!-- Property Details -->
