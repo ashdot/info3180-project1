@@ -27,16 +27,24 @@ body {
 
 }
 
-.property-grid {
+/* .property-grid {
     list-style: none;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
+} */
+
+.card-img-top {
+    width: 100%;
+    height: 200px;       /* Set your desired fixed height here */
+    object-fit: cover;   /* This is the magic: it crops the image to fit */
+    object-position: center; /* Ensures the middle of the house is visible */
 }
 
-.property-grid li {
-    width: 100%;
-    aspect-ratio: 1 / 1;  
-    overflow: hidden;   
-}
+#view-prop {
+    border-radius: 1px;
+    width:100%;
+    padding: 10px;
+    font-weight: bold;
+} 

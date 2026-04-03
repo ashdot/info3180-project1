@@ -7,30 +7,42 @@
 <h1 class="fw-bold">Properties</h1>
 
     
-<ul class="property-grid" style="list-style: none; padding: 0;">
+<div class="row">
     
     {% for property in properties %}
     
+    <div class="col-md-4 mb-4">
+        
+        <div class="card h-100 shadow-sm border-0">
+            
+            <img class="card-img-top" src="{{ url_for('static', filename='uploads/' ~ property.photo_filename) }}" alt="Property Image">
 
-    <li>
-        <!-- Property Image -->
-        <img src="{{ url_for('static', filename='uploads/' ~ property.photo_filename) }}" width="200" alt="Property Image">
+            <div class="card-body">
+                <h5 class="card-title mb-1 fw-semibold">
+                    {{ property.title }}
+                </h5>
 
-        <!-- Property Details -->
-        <!--Font awesome was used because Bootstrap was limited in icon variety-->
-        <p>${{ "{:,}".format(property.price) }}</p>
-        <p>{{ property.title }}</p>
-        <p><i class="fa-solid fa-location-dot"></i>{{ property.location }}</p> 
+                <p class="location text-muted small">
+                    <i class="fa-solid fa-location-dot me-2"></i>{{ property.location }}
+                </p>
 
-        <!-- View Property Button -->
-        <a href="{{ url_for('get_properties', property_id=property.id) }}" class="btn btn-primary">
-            View Property
-        </a>
-    </li>
+                <span class="badge rounded-pill bg-primary px-3 py-2 mt-2">
+                    ${{ "{:,}".format(property.price) }}
+                </span>
+            </div>
+
+            <div class="d-grid">
+                <a href="{{ url_for('get_properties', property_id=property.id) }}" 
+                   class="btn btn-primary py-3 fw-bold border-0" 
+                   style="border-radius: 0 0 .375rem .375rem;">
+                    View Property
+                </a>
+            </div>
+        </div>
+    </div>
   
     {% endfor %}
-</ul>
-
+</div>
 
 
 
