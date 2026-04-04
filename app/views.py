@@ -46,7 +46,7 @@ def new_properties():
 
     if form.validate_on_submit():
 
-        # Get file data and save to your uploads folder
+
 
         #photo, title,description, no of bedrooms, no of bathrooms, location and price, house and apartment
 
@@ -66,7 +66,7 @@ def new_properties():
         photo.save(photo_path)
 
         new_property = Property (
-            # ... other fields ...
+
             title = title, 
             description=description,
             number_of_bedrooms=no_of_bedrooms,
@@ -74,7 +74,7 @@ def new_properties():
             location=location, 
             price = price, 
             property_type=property_type,
-            photo_filename=filename  # This is the string the DB wants!
+            photo_filename=filename  
         )
 
 
