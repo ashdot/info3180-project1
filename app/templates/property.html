@@ -1,35 +1,60 @@
 {% extends "base.html" %}
 
-
-
 {% block main %}
 
-    <!-- Property Image -->
-    <img src="{{ url_for('get_property_photo', filename=property.photo_filename) }}" width="200" alt="Property Image">
+
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-lg-10 col-xl-9"> 
+        
+        <div class="card mb-3 shadow-sm border-0 overflow-hidden"> 
 
 
-    <!-- Property Details -->
-    <!--Font awesome was used because Bootstrap was limited in icon variety-->
+        <div class="row g-0 align-items-stretch"> 
 
-    <p>{{property.title}}</p>
-    
-    <p>${{ "{:,}".format(property.price) }}</p>
-    <p>{{property.type}}</p>
+        <!--Property Image - GEMINI HELPED ME WITH UNDERSTANDING AND FORMING PROPER BOOTSTRAP CSS-->
+            
+        <div class="col-md-5"> 
 
-    <p>{{property.description}}</p>
+            <img src="{{ url_for('get_property_photo', filename=property.photo_filename) }}" 
+                 class="img-fluid h-100 object-fit-cover" 
+                 alt="{{ property.title }}"
+                 style="min-height: 350px;"> 
+          </div>
 
-    <p><i class="fa-solid fa-bed"></i>{{ property.number_of_bedrooms}} Bedrooms</p>
-    <p><i class="fa-solid fa-bath"></i>{{ property.number_of_bathrooms}} Bathrooms</p>
+        <!--Property Details-->
+          
+          <div class="col-md-7">
+            <div class="card-body p-4 d-flex flex-column h-100"> 
+                
+                <h4 class="card-title mb-3 fw-bold">{{property.title}}</h4>
+             
+                <div class="mb-4">
+                    <span class="badge rounded-pill bg-sky-blue px-3 py-2 me-1">${{ "{:,}".format(property.price) }}</span>
+                    <span class="badge rounded-pill bg-warning text-white px-3 py-2 ms-2">{{property.property_type}}</span>
+                </div>
 
-    <p><i class="fa-solid fa-location-dot"></i>{{ property.location }}</p>
+                <p class="text-muted mb-4">{{property.description}}</p>
 
-    <!-- View Property Button -->
-    <a  class="btn btn-primary">
-        Email Realtor 
-    </a>
+                <div class="d-flex gap-4 mb-3 fw-semibold">
+                    <span><i class="fa-solid fa-bed me-2"></i>{{ property.number_of_bedrooms}} Bedrooms</span>
+                    <span><i class="fa-solid fa-bath me-2"></i>{{ property.number_of_bathrooms}} Bathrooms</span>
+                </div>
 
+                <p class="text-muted mb-4"><i class="fa-solid fa-location-dot me-2"></i>{{ property.location }}</p>
 
+                <div class="mt-auto">
+                    <a class="btn btn-primary">Email Realtor</a>
+                </div>
+            </div>
+          </div>
 
+        </div>
+      </div>
 
+    </div>
+  </div>
+</div>
 {% endblock %}
-

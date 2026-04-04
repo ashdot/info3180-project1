@@ -4,6 +4,8 @@
 
 {% block main %}
 
+{% include 'flash_messages.html' %}
+
 <h1 class="fw-bold">Properties</h1>
 
     
@@ -26,7 +28,7 @@
                     <i class="fa-solid fa-location-dot me-2"></i>{{ property.location }}
                 </p>
 
-                <span class="badge rounded-pill bg-primary px-3 py-2 mt-2">
+                <span class="badge rounded-pill bg-sky-blue px-3 py-2 mt-2">
                     ${{ "{:,}".format(property.price) }}
                 </span>
             </div>

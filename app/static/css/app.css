@@ -42,9 +42,25 @@ body {
     object-position: center; /* Ensures the middle of the house is visible */
 }
 
+.card-horizontal-img {
+    width: 100%;       /* Fills the column width */
+    height: 100%;      /* Fills the column height */
+    object-fit: cover; /* Crops the edges so the house isn't squashed */
+    object-position: center; /* Keeps the middle of the photo visible */
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
 #view-prop {
     border-radius: 1px;
     width:100%;
     padding: 10px;
     font-weight: bold;
 } 
+
+.bg-sky-blue {
+    background-color: #42acf2 !important; /* A clean, professional light blue */
+    color: white !important;
+}

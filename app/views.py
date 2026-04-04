@@ -83,12 +83,12 @@ def new_properties():
 
 
 
+        
         flash('Property Added', 'success')
-
         return redirect(url_for('properties'))
 
 
-    
+  
     return render_template('newproperty.html', form=form)
 
 
@@ -105,21 +105,7 @@ def get_property_photo(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-# def get_uploaded_images():
 
-#     rootdir = os.getcwd()
-
-#     upload_folder = os.path.join(rootdir, "uploads")
-
-#     images = {}
-
-#     for subdir, dirs, files in os.walk(upload_folder):
-#         for file in files: 
-#             if file.lower().endswith(('.png', '.jpg')):
-#                 images.append(file)
-
-
-#     return images
 
 ###
 # The functions below should be applicable to all Flask apps.
